@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Demo of Chrome bug with extensions and storage partitioning",
+  "version": "0.1.0",
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-thirdparty.js"]
+    },
+    {
+      "matches": ["https://example.com/"],
+      "js": ["content-app.js"],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["iframe-to-app.html"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "host_permissions": [
+    "https://example.com/*",
+    "https://example.com/"
+  ]
+}
